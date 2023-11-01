@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Basic Calculator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+
+        .calculator {
+            width: 300px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 10px;
+        }
+
+        .display {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+        }
+
+        input {
+            width: 100%;
+            font-size: 24px;
+            text-align: right;
+        }
+
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+
+        button {
+            padding: 10px;
+            font-size: 20px;
+            cursor: pointer;
+            border: none;
+            width: 100%;
+            border-radius: 5px;
+        }
+
+        button:hover {
+            background-color: #e0e0e0;
+        }
+
+        .ac-button {
+            background-color: lightgreen;
+            color: #000;
+        }
+
+        .operation-button {
+            background-color: lightblue;
+            color: #000;
+        }
+
+        .number-button {
+            background-color: #000;
+            color: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <div class="display">
+            <input type="text" id="result" value="0" readonly>
+        </div>
+        <div class="buttons">
+            <button class="ac-button" onclick="clearAll()">AC</button>
+            <button class="ac-button" onclick="clearResult()">C</button>
+            <button class="operation-button" onclick="appendToResult('+')">+</button>
+            <button class="operation-button" onclick="appendToResult('-')">-</button>
+            <button class="operation-button" onclick="appendToResult('*')">*</button>
+            <button class="operation-button" onclick="appendToResult('/')">/</button>
+            <button class="number-button" onclick="appendToResult('7')">7</button>
+            <button class="number-button" onclick="appendToResult('8')">8</button>
+            <button class="number-button" onclick="appendToResult('9')">9</button>
+            <button class="number-button" onclick="appendToResult('4')">4</button>
+            <button class="number-button" onclick="appendToResult('5')">5</button>
+            <button class="number-button" onclick="appendToResult('6')">6</button>
+            <button class="number-button" onclick="appendToResult('1')">1</button>
+            <button class="number-button" onclick="appendToResult('2')">2</button>
+            <button class="number-button" onclick="appendToResult('3')">3</button>
+            <button class="number-button" onclick="appendToResult('0')">0</button>
+            <button class="operation-button" onclick="calculateResult()">=</button>
+        </div>
+    </div>
+
+    <script>
+        function appendToResult(value) {
+            const resultInput = document.getElementById("result");
+            if (resultInput.value === "0" && value !== "+" && value !== "-" && value !== "*" && value !== "/") {
+                resultInput.value = value;
+            } else {
+                resultInput.value += value;
+            }
+        }
+
+        function clearResult() {
+            document.getElementById("result").value = "0";
+        }
+
+        function clearAll() {
+            document.getElementById("result").value = "0";
+        }
+
+        function calculateResult() {
+            const resultInput = document.getElementById("result");
+            try {
+                resultInput.value = eval(resultInput.value);
+            } catch (error) {
+                resultInput.value = "Error";
+            }
+        }
+    </script>
+</body>
+</html>
